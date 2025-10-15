@@ -16,13 +16,13 @@ void setup() {
   hwInitSensors();
   hwInitRelays();
 
-  Serial.println("=== ESP32 Greenhouse – FreeRTOS Core (Modular) ===");
-
   // 3) Tasks
   xTaskCreatePinnedToCore(TaskDHT,   "TaskDHT",   4096, NULL, 1, NULL, 1);
   xTaskCreatePinnedToCore(TaskSoil,  "TaskSoil",  4096, NULL, 1, NULL, 1);
   xTaskCreatePinnedToCore(TaskLight, "TaskLight", 4096, NULL, 1, NULL, 1);
   xTaskCreatePinnedToCore(TaskRelay, "TaskRelay", 4096, NULL, 1, NULL, 1);
+  xTaskCreatePinnedToCore(TaskMQTT, "TaskMQTT", 4096, NULL, 1, NULL, 1);
+
 }
 
 void loop() {
