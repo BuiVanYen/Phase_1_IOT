@@ -19,3 +19,8 @@
 #define MQTT_TOPIC_RELAY_COMMAND "greenhouse/esp32/relay/command"
 #define MQTT_TOPIC_MODE_COMMAND "greenhouse/esp32/mode/command"
 
+// Ngưỡng tự động
+#define MQTT_TOPIC_THRESHOLDS_SET     "greenhouse/esp32/thresholds/set"
+#define MQTT_TOPIC_THRESHOLDS_STATUS  "greenhouse/esp32/thresholds/status"
+
+
