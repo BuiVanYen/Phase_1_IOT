@@ -6,7 +6,7 @@
 #include <hw_init.h>
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   delay(200);
 
   // 1) Wi-Fi
@@ -21,6 +21,7 @@ void setup() {
   xTaskCreatePinnedToCore(TaskSoil,  "TaskSoil",  4096, NULL, 1, NULL, 1);
   xTaskCreatePinnedToCore(TaskLight, "TaskLight", 4096, NULL, 1, NULL, 1);
   xTaskCreatePinnedToCore(TaskMQTT, "TaskMQTT", 4096, NULL, 1, NULL, 1);
+  //xTaskCreatePinnedToCore(TaskThingSpeak, "TaskTS", 4096, NULL, 1, NULL, 1);
 
 }
 
