@@ -13,6 +13,8 @@ struct AppState {
   bool relay2 = false; // bơm
   bool relay3 = false; // đèn
   bool relay4 = false; // dự phòng
+
+  bool autoMode = true;    // <-- MẶC ĐỊNH AUTO = true
 };
 
 extern AppState gState;

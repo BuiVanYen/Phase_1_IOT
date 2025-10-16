@@ -9,16 +9,13 @@
 #define MQTT_USER     "iot"      // username đã tạo bằng mosquitto_passwd
 #define MQTT_PASS     "admin"     //password tương ứng
 // --- Định nghĩa các chủ đề (Topics) ---
-
-// Chủ đề để ESP32 gửi dữ liệu cảm biến (nhiệt độ, độ ẩm...) lên server
-// ESP32 -> Server
+#define RELAY_ACTIVE_LEVEL HIGH
+// 1. Chủ đề ESP32 GỬI ĐI
 #define MQTT_TOPIC_TELEMETRY "greenhouse/esp32/telemetry"
-
-// Chủ đề để ESP32 gửi báo cáo trạng thái của các relay (bật/tắt)
-// ESP32 -> Server
 #define MQTT_TOPIC_RELAY_STATUS "greenhouse/esp32/relay/status"
+#define MQTT_TOPIC_MODE_STATUS "greenhouse/esp32/mode/status"
 
-// Chủ đề để ESP32 nhận lệnh điều khiển relay từ server (Node-RED)
-// Server -> ESP32
+// 2. Chủ đề ESP32 NHẬN VỀ
 #define MQTT_TOPIC_RELAY_COMMAND "greenhouse/esp32/relay/command"
+#define MQTT_TOPIC_MODE_COMMAND "greenhouse/esp32/mode/command"
 

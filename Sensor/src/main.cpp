@@ -20,7 +20,6 @@ void setup() {
   xTaskCreatePinnedToCore(TaskDHT,   "TaskDHT",   4096, NULL, 1, NULL, 1);
   xTaskCreatePinnedToCore(TaskSoil,  "TaskSoil",  4096, NULL, 1, NULL, 1);
   xTaskCreatePinnedToCore(TaskLight, "TaskLight", 4096, NULL, 1, NULL, 1);
-  xTaskCreatePinnedToCore(TaskRelay, "TaskRelay", 4096, NULL, 1, NULL, 1);
   xTaskCreatePinnedToCore(TaskMQTT, "TaskMQTT", 4096, NULL, 1, NULL, 1);
 
 }

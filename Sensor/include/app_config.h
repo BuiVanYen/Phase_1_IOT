@@ -18,7 +18,9 @@
 
 // ===== THRESHOLDS =====
 #define TEMP_FAN_ON_C        32.0f
+#define TEMP_FAN_OFF_C       28.0f
 #define LUX_LIGHT_ON         100.0f
+#define LUX_LIGHT_OFF        300.0f
 #define SOIL_PCT_PUMP_ON     35.0f
 #define SOIL_PCT_PUMP_OFF    45.0f
 
