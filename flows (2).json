@@ -1,0 +1,1290 @@
+[
+    {
+        "id": "08561db3dc30e739",
+        "type": "tab",
+        "label": "DATN_AIOT",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "02b70acb7dad71c5",
+        "type": "mqtt in",
+        "z": "08561db3dc30e739",
+        "name": "Lắng nghe Telemetry",
+        "topic": "greenhouse/esp32/telemetry",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f1dc93d87d13f72a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 460,
+        "y": 260,
+        "wires": [
+            [
+                "f963197d55b17af4",
+                "7f4d0935d2afef4e",
+                "ef23c4c38f751f27",
+                "39a476e17df634ce"
+            ]
+        ]
+    },
+    {
+        "id": "365bcbf2a6107e19",
+        "type": "ui_gauge",
+        "z": "08561db3dc30e739",
+        "name": "Nhiệt độ",
+        "group": "3c1489bffd0f11ed",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Nhiệt độ",
+        "label": "°C",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "60",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1040,
+        "y": 120,
+        "wires": [],
+        "icon": "font-awesome/fa-thermometer-half"
+    },
+    {
+        "id": "f963197d55b17af4",
+        "type": "change",
+        "z": "08561db3dc30e739",
+        "name": "lấy nhiệt độ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temperature",
+                "tot": "msg"
+            }
+        ],
+        "x": 850,
+        "y": 120,
+        "wires": [
+            [
+                "365bcbf2a6107e19",
+                "7e10ffc9fe133fec"
+            ]
+        ]
+    },
+    {
+        "id": "7f4d0935d2afef4e",
+        "type": "change",
+        "z": "08561db3dc30e739",
+        "name": "lấy độ ẩm",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.humidity",
+                "tot": "msg"
+            }
+        ],
+        "x": 840,
+        "y": 180,
+        "wires": [
+            [
+                "375603cb2fd02995",
+                "c9dda0ab01f98155"
+            ]
+        ]
+    },
+    {
+        "id": "375603cb2fd02995",
+        "type": "ui_gauge",
+        "z": "08561db3dc30e739",
+        "name": "Độ ẩm",
+        "group": "3c1489bffd0f11ed",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Độ ẩm không khí",
+        "label": "%",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ff0000",
+            "#e6e600",
+            "#3300ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1030,
+        "y": 180,
+        "wires": [],
+        "icon": "font-awesome/fa-tint"
+    },
+    {
+        "id": "ba71af2175c941b2",
+        "type": "ui_gauge",
+        "z": "08561db3dc30e739",
+        "name": "Độ ẩm đất",
+        "group": "3c1489bffd0f11ed",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Độ ẩm đất",
+        "label": "%",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ff0000",
+            "#e6e600",
+            "#1100ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1050,
+        "y": 260,
+        "wires": [],
+        "icon": "font-awesome/fa-leaf"
+    },
+    {
+        "id": "ef23c4c38f751f27",
+        "type": "change",
+        "z": "08561db3dc30e739",
+        "name": "lấy độ ẩm đất",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.soil_moisture",
+                "tot": "msg"
+            }
+        ],
+        "x": 860,
+        "y": 260,
+        "wires": [
+            [
+                "ba71af2175c941b2",
+                "5212745bd1d564ac"
+            ]
+        ]
+    },
+    {
+        "id": "39a476e17df634ce",
+        "type": "change",
+        "z": "08561db3dc30e739",
+        "name": "lấy ánh sáng",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.light_intensity",
+                "tot": "msg"
+            }
+        ],
+        "x": 850,
+        "y": 320,
+        "wires": [
+            [
+                "2213b8f2986671f8",
+                "6c2bc77499a8b166"
+            ]
+        ]
+    },
+    {
+        "id": "2213b8f2986671f8",
+        "type": "ui_gauge",
+        "z": "08561db3dc30e739",
+        "name": "Cường độ ánh sáng",
+        "group": "3c1489bffd0f11ed",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Cường độ ánh sáng",
+        "label": "lux",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "2000",
+        "colors": [
+            "#1a1f1a",
+            "#d5d576",
+            "#e70840"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1080,
+        "y": 320,
+        "wires": [],
+        "icon": "font-awesome/fa-sun-o"
+    },
+    {
+        "id": "a7bacb9d3674dfa6",
+        "type": "ui_switch",
+        "z": "08561db3dc30e739",
+        "name": "Mode",
+        "label": "Chế độ thủ công",
+        "tooltip": "OFF=Tự động • ON=Thủ công",
+        "group": "351760ba31147e24",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1090,
+        "y": 960,
+        "wires": [
+            [
+                "02559a556f2c1d1b"
+            ]
+        ]
+    },
+    {
+        "id": "02559a556f2c1d1b",
+        "type": "function",
+        "z": "08561db3dc30e739",
+        "name": "Mode build command",
+        "func": "var manual = !!msg.payload; // ON=manual\nmsg.payload = { auto_mode: !manual };\nmsg.topic = \"greenhouse/esp32/mode/command\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1300,
+        "y": 1020,
+        "wires": [
+            [
+                "73c5e3756410aba1"
+            ]
+        ]
+    },
+    {
+        "id": "73c5e3756410aba1",
+        "type": "mqtt out",
+        "z": "08561db3dc30e739",
+        "name": "Gửi lệnh mode",
+        "topic": "greenhouse/esp32/mode/command",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f1dc93d87d13f72a",
+        "x": 1580,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "5a90dfed86761b50",
+        "type": "mqtt in",
+        "z": "08561db3dc30e739",
+        "name": "Mode status",
+        "topic": "greenhouse/esp32/mode/status",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f1dc93d87d13f72a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 590,
+        "y": 1020,
+        "wires": [
+            [
+                "327c5288bdee2956"
+            ]
+        ]
+    },
+    {
+        "id": "327c5288bdee2956",
+        "type": "function",
+        "z": "08561db3dc30e739",
+        "name": "Đồng bộ mode -> UI & khóa nút",
+        "func": "var auto = !!msg.payload.auto_mode;\nvar manual = !auto;\nvar o1 = { payload: manual };\nvar ctrl = { enabled: manual, ui_control: { disabled: auto } };\nreturn [ o1, ctrl, ctrl, ctrl, ctrl ];",
+        "outputs": 5,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 1020,
+        "wires": [
+            [
+                "a7bacb9d3674dfa6"
+            ],
+            [
+                "c26fc7220aeb56ae"
+            ],
+            [
+                "0964fa259065af60"
+            ],
+            [
+                "124d854429e9d2c4"
+            ],
+            [
+                "03b36b7877d6630b"
+            ]
+        ]
+    },
+    {
+        "id": "c26fc7220aeb56ae",
+        "type": "ui_switch",
+        "z": "08561db3dc30e739",
+        "name": "R1",
+        "label": "Quạt (Relay 1)",
+        "tooltip": "",
+        "group": "351760ba31147e24",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1120,
+        "y": 660,
+        "wires": [
+            [
+                "7ccfbb9a48c16b49"
+            ]
+        ],
+        "icon": "font-awesome/fa-snowflake-o"
+    },
+    {
+        "id": "0964fa259065af60",
+        "type": "ui_switch",
+        "z": "08561db3dc30e739",
+        "name": "R2",
+        "label": "Bơm (Relay 2)",
+        "tooltip": "",
+        "group": "351760ba31147e24",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1120,
+        "y": 720,
+        "wires": [
+            [
+                "851fa38173bc5e9b"
+            ]
+        ],
+        "icon": "font-awesome/fa-tint"
+    },
+    {
+        "id": "124d854429e9d2c4",
+        "type": "ui_switch",
+        "z": "08561db3dc30e739",
+        "name": "R3",
+        "label": "Đèn (Relay 3)",
+        "tooltip": "",
+        "group": "351760ba31147e24",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1120,
+        "y": 780,
+        "wires": [
+            [
+                "f5117c83301309b8"
+            ]
+        ],
+        "icon": "node-red-contrib-ui-led/ui_led.png"
+    },
+    {
+        "id": "03b36b7877d6630b",
+        "type": "ui_switch",
+        "z": "08561db3dc30e739",
+        "name": "R4",
+        "label": "Relay 4",
+        "tooltip": "",
+        "group": "351760ba31147e24",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1130,
+        "y": 860,
+        "wires": [
+            [
+                "12b718374ba3c7eb"
+            ]
+        ],
+        "icon": "font-awesome/fa-plug"
+    },
+    {
+        "id": "7ccfbb9a48c16b49",
+        "type": "function",
+        "z": "08561db3dc30e739",
+        "name": "R1 build command",
+        "func": "msg.payload = { relay: 1, state: !!msg.payload };\nmsg.topic = \"greenhouse/esp32/relay/command\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 660,
+        "wires": [
+            [
+                "34990ca0332177c7"
+            ]
+        ]
+    },
+    {
+        "id": "851fa38173bc5e9b",
+        "type": "function",
+        "z": "08561db3dc30e739",
+        "name": "R2 build command",
+        "func": "msg.payload = { relay: 2, state: !!msg.payload };\nmsg.topic = \"greenhouse/esp32/relay/command\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 720,
+        "wires": [
+            [
+                "34990ca0332177c7"
+            ]
+        ]
+    },
+    {
+        "id": "f5117c83301309b8",
+        "type": "function",
+        "z": "08561db3dc30e739",
+        "name": "R3 build command",
+        "func": "msg.payload = { relay: 3, state: !!msg.payload };\nmsg.topic = \"greenhouse/esp32/relay/command\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 780,
+        "wires": [
+            [
+                "34990ca0332177c7"
+            ]
+        ]
+    },
+    {
+        "id": "12b718374ba3c7eb",
+        "type": "function",
+        "z": "08561db3dc30e739",
+        "name": "R4 build command",
+        "func": "msg.payload = { relay: 4, state: !!msg.payload };\nmsg.topic = \"greenhouse/esp32/relay/command\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1300,
+        "y": 860,
+        "wires": [
+            [
+                "34990ca0332177c7"
+            ]
+        ]
+    },
+    {
+        "id": "34990ca0332177c7",
+        "type": "mqtt out",
+        "z": "08561db3dc30e739",
+        "name": "Gửi lệnh relay",
+        "topic": "greenhouse/esp32/relay/command",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f1dc93d87d13f72a",
+        "x": 1640,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "6cb8596ba2c64d17",
+        "type": "mqtt in",
+        "z": "08561db3dc30e739",
+        "name": "Relay status",
+        "topic": "greenhouse/esp32/relay/status",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f1dc93d87d13f72a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 410,
+        "y": 720,
+        "wires": [
+            [
+                "29b9d33c53d3777d",
+                "0d103fbef3665848",
+                "a88359279f20d053",
+                "d16505d470771427"
+            ]
+        ]
+    },
+    {
+        "id": "29b9d33c53d3777d",
+        "type": "change",
+        "z": "08561db3dc30e739",
+        "name": "Relay1 -> UI",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.relay1",
+                "tot": "msg"
+            }
+        ],
+        "x": 900,
+        "y": 660,
+        "wires": [
+            [
+                "c26fc7220aeb56ae"
+            ]
+        ]
+    },
+    {
+        "id": "0d103fbef3665848",
+        "type": "change",
+        "z": "08561db3dc30e739",
+        "name": "Relay2 -> UI",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.relay2",
+                "tot": "msg"
+            }
+        ],
+        "x": 900,
+        "y": 720,
+        "wires": [
+            [
+                "0964fa259065af60"
+            ]
+        ]
+    },
+    {
+        "id": "a88359279f20d053",
+        "type": "change",
+        "z": "08561db3dc30e739",
+        "name": "Relay3 -> UI",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.relay3",
+                "tot": "msg"
+            }
+        ],
+        "x": 900,
+        "y": 780,
+        "wires": [
+            [
+                "124d854429e9d2c4"
+            ]
+        ]
+    },
+    {
+        "id": "d16505d470771427",
+        "type": "change",
+        "z": "08561db3dc30e739",
+        "name": "Relay4 -> UI",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.relay4",
+                "tot": "msg"
+            }
+        ],
+        "x": 900,
+        "y": 880,
+        "wires": [
+            [
+                "03b36b7877d6630b"
+            ]
+        ]
+    },
+    {
+        "id": "7e10ffc9fe133fec",
+        "type": "ui_chart",
+        "z": "08561db3dc30e739",
+        "name": "",
+        "group": "7601869c988d58cd",
+        "order": 0,
+        "width": "6",
+        "height": "5",
+        "label": "Nhiệt độ (°C)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#f00000",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1210,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c9dda0ab01f98155",
+        "type": "ui_chart",
+        "z": "08561db3dc30e739",
+        "name": "",
+        "group": "7601869c988d58cd",
+        "order": 1,
+        "width": "6",
+        "height": "5",
+        "label": "Độ ẩm (%)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#0095ff",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1210,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5212745bd1d564ac",
+        "type": "ui_chart",
+        "z": "08561db3dc30e739",
+        "name": "",
+        "group": "7601869c988d58cd",
+        "order": 2,
+        "width": "6",
+        "height": "5",
+        "label": "Độ ẩm đất (%)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1eb330",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1220,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6c2bc77499a8b166",
+        "type": "ui_chart",
+        "z": "08561db3dc30e739",
+        "name": "",
+        "group": "7601869c988d58cd",
+        "order": 3,
+        "width": "6",
+        "height": "5",
+        "label": "Ánh sáng (lux)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#850bfe",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#7100db",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1220,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ui_temp_on",
+        "type": "ui_numeric",
+        "z": "08561db3dc30e739",
+        "name": "Nhiệt bật quạt (°C)",
+        "label": "Bật quạt ≥ (°C)",
+        "tooltip": "",
+        "group": "870b0155ec0cfcb0",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": false,
+        "topic": "temp_on",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": 10,
+        "max": 60,
+        "step": 0.5,
+        "className": "",
+        "x": 1030,
+        "y": 1100,
+        "wires": [
+            [
+                "fn_thresh_update"
+            ]
+        ]
+    },
+    {
+        "id": "ui_temp_off",
+        "type": "ui_numeric",
+        "z": "08561db3dc30e739",
+        "name": "Nhiệt tắt quạt (°C)",
+        "label": "Tắt quạt ≤ (°C)",
+        "tooltip": "",
+        "group": "870b0155ec0cfcb0",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": false,
+        "topic": "temp_off",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": 10,
+        "max": 60,
+        "step": 0.5,
+        "className": "",
+        "x": 1040,
+        "y": 1140,
+        "wires": [
+            [
+                "fn_thresh_update"
+            ]
+        ]
+    },
+    {
+        "id": "ui_soil_on",
+        "type": "ui_numeric",
+        "z": "08561db3dc30e739",
+        "name": "Ẩm đất bật bơm (%)",
+        "label": "Bật bơm ≤ (%)",
+        "tooltip": "",
+        "group": "870b0155ec0cfcb0",
+        "order": 3,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": false,
+        "topic": "soil_on",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "className": "",
+        "x": 1040,
+        "y": 1180,
+        "wires": [
+            [
+                "fn_thresh_update"
+            ]
+        ]
+    },
+    {
+        "id": "ui_soil_off",
+        "type": "ui_numeric",
+        "z": "08561db3dc30e739",
+        "name": "Ẩm đất tắt bơm (%)",
+        "label": "Tắt bơm ≥ (%)",
+        "tooltip": "",
+        "group": "870b0155ec0cfcb0",
+        "order": 4,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": false,
+        "topic": "soil_off",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "className": "",
+        "x": 1040,
+        "y": 1220,
+        "wires": [
+            [
+                "fn_thresh_update"
+            ]
+        ]
+    },
+    {
+        "id": "ui_lux_on",
+        "type": "ui_numeric",
+        "z": "08561db3dc30e739",
+        "name": "Lux bật đèn",
+        "label": "Bật đèn ≤ (lux)",
+        "tooltip": "",
+        "group": "870b0155ec0cfcb0",
+        "order": 5,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": false,
+        "topic": "lux_on",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 5000,
+        "step": 10,
+        "className": "",
+        "x": 1030,
+        "y": 1260,
+        "wires": [
+            [
+                "fn_thresh_update"
+            ]
+        ]
+    },
+    {
+        "id": "ui_lux_off",
+        "type": "ui_numeric",
+        "z": "08561db3dc30e739",
+        "name": "Lux tắt đèn",
+        "label": "Tắt đèn ≥ (lux)",
+        "tooltip": "",
+        "group": "870b0155ec0cfcb0",
+        "order": 6,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": false,
+        "topic": "lux_off",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 5000,
+        "step": 10,
+        "className": "",
+        "x": 1030,
+        "y": 1300,
+        "wires": [
+            [
+                "fn_thresh_update"
+            ]
+        ]
+    },
+    {
+        "id": "fn_thresh_update",
+        "type": "function",
+        "z": "08561db3dc30e739",
+        "name": "Cập nhật & gửi ngưỡng",
+        "func": "// Nhận 1 ô số thay đổi -> cập nhật object ngưỡng trong flow -> gửi cả bộ lên ESP32\nlet th = flow.get('th') || {\n  temp_on: 33, temp_off: 30,\n  soil_on: 35, soil_off: 55,\n  lux_on: 200, lux_off: 600\n};\n\nconst key = String(msg.topic);\nconst val = Number(msg.payload);\nif (key in th) th[key] = val;\nflow.set('th', th);\n\nreturn {\n  topic: \"greenhouse/esp32/thresholds/set\",\n  payload: th\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 1220,
+        "wires": [
+            [
+                "mqtt_thresh_set"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_thresh_set",
+        "type": "mqtt out",
+        "z": "08561db3dc30e739",
+        "name": "Gửi ngưỡng -> ESP32",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "brk_mqtt",
+        "x": 1720,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "mqtt_thresh_status",
+        "type": "mqtt in",
+        "z": "08561db3dc30e739",
+        "name": "Nhận ngưỡng (retained)",
+        "topic": "greenhouse/esp32/thresholds/status",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "brk_mqtt",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 330,
+        "y": 1220,
+        "wires": [
+            [
+                "fn_thresh_to_ui"
+            ]
+        ]
+    },
+    {
+        "id": "fn_thresh_to_ui",
+        "type": "function",
+        "z": "08561db3dc30e739",
+        "name": "Đẩy ngưỡng vào UI",
+        "func": "// payload từ ESP32: {temp_on, temp_off, soil_on, soil_off, lux_on, lux_off}\nconst th = msg.payload || {};\nflow.set('th', th);\nreturn [\n  {payload: th.temp_on},\n  {payload: th.temp_off},\n  {payload: th.soil_on},\n  {payload: th.soil_off},\n  {payload: th.lux_on},\n  {payload: th.lux_off}\n];",
+        "outputs": 6,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 1220,
+        "wires": [
+            [
+                "ui_temp_on"
+            ],
+            [
+                "ui_temp_off"
+            ],
+            [
+                "ui_soil_on"
+            ],
+            [
+                "ui_soil_off"
+            ],
+            [
+                "ui_lux_on"
+            ],
+            [
+                "ui_lux_off"
+            ]
+        ]
+    },
+    {
+        "id": "f1dc93d87d13f72a",
+        "type": "mqtt-broker",
+        "name": "HiveMQ",
+        "broker": "816f8ccfbe1f457d88e0d150fd568a73.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "099d1281f8aeadd7",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "3c1489bffd0f11ed",
+        "type": "ui_group",
+        "name": "Thông số cảm biến",
+        "tab": "650160fa6b69eedb",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "351760ba31147e24",
+        "type": "ui_group",
+        "name": "Bảng điều khiển",
+        "tab": "650160fa6b69eedb",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7601869c988d58cd",
+        "type": "ui_group",
+        "name": "Biểu đồ dữ liệu",
+        "tab": "650160fa6b69eedb",
+        "order": 3,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "870b0155ec0cfcb0",
+        "type": "ui_group",
+        "name": "Chỉnh ngưỡng cảm biến",
+        "tab": "650160fa6b69eedb",
+        "order": 4,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "brk_mqtt",
+        "type": "mqtt-broker",
+        "name": "Mosquitto",
+        "broker": "192.168.2.4",
+        "port": "1883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "099d1281f8aeadd7",
+        "type": "tls-config",
+        "name": "HiveMQ Cloud TLS",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "816f8ccfbe1f457d88e0d150fd568a73.s1.eu.hivemq.cloud",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "650160fa6b69eedb",
+        "type": "ui_tab",
+        "name": "AIOT GreenHouse",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "8977b4688d99abda",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]

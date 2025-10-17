@@ -3,11 +3,12 @@
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 #include <Preferences.h>           
+#include <WiFiClientSecure.h>
 #include "app_config.h"
 #include "app_state.h"
 #include "mqtt_config.h"
 
-static WiFiClient   net;
+static WiFiClientSecure net;
 static PubSubClient mqtt(net);
 static Preferences  prefs;        
 
@@ -90,6 +91,8 @@ static void mqttConnect() {
   mqtt.setBufferSize(512);
   mqtt.setServer(MQTT_BROKER, MQTT_PORT);
   mqtt.setCallback(handleMqttCallback);
+
+  net.setInsecure();
 
   Serial.println("[MQTT] Kết nối broker...");
   while (!mqtt.connected()) {
