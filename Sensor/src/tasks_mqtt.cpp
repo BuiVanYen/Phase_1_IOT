@@ -4,6 +4,8 @@
 #include <ArduinoJson.h>
 #include <Preferences.h>           
 #include <WiFiClientSecure.h>
+#include <time.h>
+#include <sys/time.h>
 #include "app_config.h"
 #include "app_state.h"
 #include "mqtt_config.h"
@@ -11,6 +13,12 @@
 static WiFiClientSecure net;
 static PubSubClient mqtt(net);
 static Preferences  prefs;        
+
+static uint64_t now_ms() {
+    struct timeval tv; gettimeofday(&tv, nullptr);
+    return (uint64_t)tv.tv_sec*1000ULL + tv.tv_usec/1000ULL;
+}
+
 
 /* ================== NGƯỠNG ĐỘNG (mặc định lấy từ app_config.h) ================== */
 struct Thresholds {
@@ -96,13 +104,28 @@ static void mqttConnect() {
 
   Serial.println("[MQTT] Kết nối broker...");
   while (!mqtt.connected()) {
-    if (mqtt.connect(MQTT_CLIENTID, MQTT_USER, MQTT_PASS)) {
+
+    bool ok = mqtt.connect(
+      MQTT_CLIENTID,
+      MQTT_USER, MQTT_PASS,
+      MQTT_TOPIC_STATUS,   // willTopic
+      1,                   // willQos (PubSubClient hỗ trợ 0 hoặc 1)
+      true,                // willRetain
+      "offline"            // willMessage
+    );
+
+    if (ok) {
       Serial.println("[MQTT] OK");
+
+      
+      mqtt.publish(MQTT_TOPIC_STATUS, "online", true);
+
+      
       mqtt.subscribe(MQTT_TOPIC_RELAY_COMMAND);
       mqtt.subscribe(MQTT_TOPIC_MODE_COMMAND);
       mqtt.subscribe(MQTT_TOPIC_THRESHOLDS_SET);
 
-      // Publish retained để UI đồng bộ ngay
+      
       publishModeStatus();
       publishRelayStatus();
       publishThresholdsStatus();
@@ -110,10 +133,12 @@ static void mqttConnect() {
       if (gState.autoMode) runAutoControlLogic();
     } else {
       Serial.printf("[MQTT] Fail rc=%d, đợi 5s...\n", mqtt.state());
-      delay(5000);
+      vTaskDelay(pdMS_TO_TICKS(5000));
+
     }
   }
 }
+
 
 static void publishRelayStatus() {
   if (!mqtt.connected()) return;
@@ -288,7 +313,17 @@ void TaskMQTT(void* pvParameters) {
       t["humidity"]        = (float)gState.humidity;
       t["soil_moisture"]   = (float)gState.soilPercent;
       t["light_intensity"] = (float)gState.lux;
-      char buf[256];
+      t["ts"]     = now_ms();                          // epoch ms
+      t["device"] = "esp32-01";                        // đặt ID 
+      t["fw"]     = "1.0.0";                           // version 
+      t["rssi"]   = WiFi.RSSI();
+      t["mode"]   = gState.autoMode ? "auto" : "manual";
+      t["r_fan"]   = gState.relay1;
+      t["r_pump"]  = gState.relay2;
+      t["r_light"] = gState.relay3;
+      t["r_backup"]= gState.relay4;
+
+      char buf[320];
       serializeJson(t, buf);
       mqtt.publish(MQTT_TOPIC_TELEMETRY, buf);
     }

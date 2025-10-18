@@ -6,6 +6,7 @@
 #define MQTT_USER     "admin"
 #define MQTT_PASS     "Admin123"
 //topic mqtt
+#define MQTT_TOPIC_STATUS               "greenhouse/esp32/status"
 #define MQTT_TOPIC_TELEMETRY            "greenhouse/esp32/telemetry"
 #define MQTT_TOPIC_RELAY_COMMAND        "greenhouse/esp32/relay/command"
 #define MQTT_TOPIC_RELAY_STATUS         "greenhouse/esp32/relay/status"
